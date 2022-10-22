@@ -8,4 +8,5 @@ OS=${BUILDKITE_PLUGIN_DHALL_SECRET_OS:-"linux"}
 BIN_DIR="${HOOKS_DIR}/../bin"
 mkdir -p "$BIN_DIR"
 
-curl -L "https://github.com/jcouyang/dhall-secret/releases/download/v0.4.32/dhall-secret-x86_64-${OS}" -o "$BIN_DIR/dhall-secret"
+test ! -x "$BIN_DIR/dhall-secret" && curl -L "https://github.com/jcouyang/dhall-secret/releases/download/v0.4.32/dhall-secret-x86_64-${OS}" -o "$BIN_DIR/dhall-secret"
+chmod +x "$BIN_DIR/*"
