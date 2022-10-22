@@ -16,10 +16,10 @@ let test =
           ''
         ]
       , plugins = Some
-        [ toMap
-            { `jcouyang/dhall-secret#main` = toMap
-                { os = bk.PluginConfigValue.L0 "linux" }
+        [ [ { mapKey = "jcouyang/dhall-secret#${env:BUILDKITE_COMMIT as Text}"
+            , mapValue = toMap { os = bk.PluginConfigValue.L0 "linux" }
             }
+          ]
         ]
       }
 
