@@ -2,11 +2,11 @@
 
 set -ueo pipefail
 
-HOOKS_DIR="$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)"
+PLUGIN_DIR="$(cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd)"
 
 OS=${BUILDKITE_PLUGIN_DHALL_SECRET_OS:-"linux"}
-BIN_DIR="${HOOKS_DIR}/../bin"
-mkdir -p "$BIN_DIR"
+mkdir -p "$PLUGIN_DIR/bin"
 
-test ! -x "$BIN_DIR/dhall-secret" && curl -L "https://github.com/jcouyang/dhall-secret/releases/download/v0.4.32/dhall-secret-x86_64-${OS}" -o "$BIN_DIR/dhall-secret"
-chmod +x "$BIN_DIR/*"
+test ! -x "$PLUGIN_DIR/bin/dhall-secret" && curl -L "https://github.com/jcouyang/dhall-secret/releases/download/v0.4.32/dhall-secret-x86_64-${OS}" -o "$PLUGIN_DIR/bin/dhall-secret"
+chmod +x "$PLUGIN_DIR/bin/*"
+test -x "$PLUGIN_DIR/bin/dhall-secret" && echo "installed"
