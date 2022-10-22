@@ -1,16 +1,18 @@
 # Dhall Secret Buildkite Plugin
 
-[![Build status](https://badge.buildkite.com/5178e1b291f93933bc2dd28a1451277e231144dfb73b2b1d71.svg)](https://buildkite.com/jcouyang/dhall-buildkite-plugin)
+[![Build status](https://badge.buildkite.com/9035899dca8d447d6a482776b4d539a8f66f70732fce0b7c10.svg)](https://buildkite.com/jcouyang/dhall-secret-buildkite-plugin)
 
-Put this into the buildkite steps as the meta step, it will read `.buildkite/pipelin.dahll` and upload steps
-
-[.buildkite/pipelin.dahll](https://github.com/jcouyang/dhall-buildkite-plugin/blob/master/.buildkite/pipeline.dhall) is a dhall example for buildkite steps
-
-```yaml
-steps:
-  - label: ':pipeline:'
-    command: 'dhall-to-yaml <<< "./.buildkite/pipeline.dhall" | buildkite-agent pipeline upload'
-    plugins:
-      - jcouyang/dhall-secret#1.0:
-          os: 'linux'
+Example:
+```
+- command: |
+      dhall-secret encrypt <<< 'let dhall-secret = https://github.com/jcouyang/dhall-secret/raw/v0.4.32/Type.dhall
+      in dhall-secret.AgeDecrypted
+            { Recipients =
+              [ "age1rl8j26etwulmav6yn8p4huu6944n7hsr2pyu2dr0evjzsj2tq92q48arjp" ]
+            , PlainText = "hello age!"
+            }'
+  label: test
+  plugins:
+    - "jcouyang/dhall-secret#main":
+        os: linux
 ```
