@@ -3,10 +3,11 @@
 set -ueo pipefail
 
 PLUGIN_DIR="$(cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd)"
-
 OS=${BUILDKITE_PLUGIN_DHALL_SECRET_OS:-"linux"}
+TARGET="$PLUGIN_DIR/bin/dhall-secret"
 mkdir -p "$PLUGIN_DIR/bin"
 
-test ! -x "$PLUGIN_DIR/bin/dhall-secret" && curl -L "https://github.com/jcouyang/dhall-secret/releases/download/v0.4.32/dhall-secret-x86_64-${OS}" -o "$PLUGIN_DIR/bin/dhall-secret"
-chmod +x "$PLUGIN_DIR/bin/*"
-test -x "$PLUGIN_DIR/bin/dhall-secret" && echo "installed"
+test ! -x "$TARGET" && curl -L "https://github.com/jcouyang/dhall-secret/releases/download/v0.4.32/dhall-secret-x86_64-${OS}" -o "$TARGET"
+chmod +x "$TARGET"
+ls -al "$TARGET"
+test -x "$TARGET" && echo "installed"
