@@ -1,7 +1,7 @@
 name: Dhall Secret
 description: Step up Dhall Secret on Buildkite
 author: https://github.com/jcouyang
-requirements: [ curl ]
+requirements: [ curl, sha256sum ]
 configuration:
   properties:
     os:
