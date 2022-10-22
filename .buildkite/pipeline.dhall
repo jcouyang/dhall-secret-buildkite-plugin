@@ -17,7 +17,7 @@ let test =
         ]
       , plugins = Some
         [ toMap
-            { `jcouyang/dhall-secret#1a01a2c19a66bbc38d0559bb52f406b7e44d4b93` = toMap
+            { `jcouyang/dhall-secret#main` = toMap
                 { os = bk.PluginConfigValue.L0 "linux" }
             }
         ]
