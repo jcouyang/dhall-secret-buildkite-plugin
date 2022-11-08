@@ -7,14 +7,14 @@ OS=${BUILDKITE_PLUGIN_DHALL_SECRET_OS:-"linux"}
 TARGET="$PLUGIN_DIR/bin/dhall-secret"
 mkdir -p "$PLUGIN_DIR/bin"
 
-test ! -x "$TARGET" && curl -L "https://github.com/jcouyang/dhall-secret/releases/download/v0.4.32/dhall-secret-x86_64-${OS}" -o "$TARGET"
+test ! -x "$TARGET" && curl -L "https://github.com/jcouyang/dhall-secret/releases/download/v0.5.50/dhall-secret-x86_64-${OS}" -o "$TARGET"
 function die { echo -e "${1:-erhhhhh}"; exit "${2:-1}"; }
 case $OS in
     linux)
-        [[ "$(sha256sum ${TARGET})" = "1787285fe0de3f8a5a9f1d6a1acf69d3c5e2e9da60afa4566d0732122b709ea7  ${TARGET}" ]] || die "invalid sha"
+        [[ "$(sha256sum ${TARGET})" = "bcaa3c35adf0dfde16fc4f65b588696fac6c13d26b8bd10ad73117853cc7852f  ${TARGET}" ]] || die "invalid sha"
         ;;
     macOS)
-        [[ "$(sha256sum ${TARGET})" = "22ad77009586fa97bb179306767c9083a709f6fc1dea55d1d13dd50a7a23e9f4  ${TARGET}" ]] || die "invalid sha"
+        [[ "$(sha256sum ${TARGET})" = "ba151db28dd662e21888d52414822bb987b87bce793c5cb62fa5a7a8d9c1c6f3  ${TARGET}" ]] || die "invalid sha"
         ;;
 esac
 chmod +x "$TARGET"
